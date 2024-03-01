@@ -28,7 +28,7 @@ The project is focused on developing a comprehensive job portal app designed to 
 
 1. Clone the repository:
 
-git clone https://github.com/Vittal-Shindhe2001/job_portal_client-.git
+git clone https://github.com/Vittal-Shindhe2001/job_portal_client.git
 
 2. Navigate to the project directory:
 
