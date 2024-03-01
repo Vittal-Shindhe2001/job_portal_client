@@ -1,14 +1,14 @@
-import React, { Suspense, useEffect, useState } from 'react';
-import { Link, Route, Switch, useHistory, useLocation, withRouter } from 'react-router-dom/cjs/react-router-dom.min';
-import Spinner from './Loding-Spinner';
+import React, { Suspense, useEffect, useState } from 'react' 
+import { Link, Route, Switch, useHistory, useLocation, withRouter } from 'react-router-dom/cjs/react-router-dom.min' 
+import Spinner from './Loding-Spinner' 
 import { jwtDecode } from 'jwt-decode'
-import PrivateRoute from './helper_function/Private_route';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import PrivateRoute from './helper_function/Private_route' 
+import { ToastContainer, toast } from 'react-toastify' 
+import 'react-toastify/dist/ReactToastify.css' 
 // Lazy load components
-// const Home = React.lazy(() => import('./Home'));
-// const Register = React.lazy(() => import('./Register'));
-// const Login = React.lazy(() => import('./Login'));
+// const Home = React.lazy(() => import('./Home')) 
+// const Register = React.lazy(() => import('./Register')) 
+// const Login = React.lazy(() => import('./Login')) 
 import Home from './Home'
 import Register from './Register'
 import Login from './Login'
@@ -43,13 +43,13 @@ const NavBar = () => {
     const location = useLocation()
 
     useEffect(() => {
-        //console.log(location);
+        //console.log(location) 
     }, [location])
     useEffect(() => {
         if (!token) {
-            history.push("/login");
+            history.push("/login") 
         }
-    }, [token, history]);
+    }, [token, history]) 
     const handleLogout = () => {
         history.push("/login")
         localStorage.clear()
@@ -190,7 +190,7 @@ const NavBar = () => {
             {
                 token && tokendata.role === 'jobseeker' && <div>
                     <Suspense fallback={<Spinner />}>
-                        <PrivateRoute path='/' component={Home} exact={true} />
+                            
                         <PrivateRoute path='/jobs' component={FindJob} exact={true} />
                         <PrivateRoute path='/profile' component={jobseekersProfile} exact={true} />
                         <PrivateRoute path="/jobseeker/job/:id" component={Job_details} />
@@ -202,7 +202,7 @@ const NavBar = () => {
             <Route path="/jobseeker/job/:id" component={Job_details} /> */}
             <ToastContainer />
         </>
-    );
-};
+    ) 
+} 
 
-export default withRouter(NavBar);
+export default withRouter(NavBar) 

@@ -1,18 +1,18 @@
-import React from "react";
-import { logErrorToMyService } from "./logErrorToMyService"; 
+import React from "react" 
+import { logErrorToMyService } from "./logErrorToMyService"  
 class ErrorBoundary extends React.Component {
   constructor(props) {
-    super(props);
-    this.state = { hasError: false, error: null, errorInfo: null };
+    super(props) 
+    this.state = { hasError: false, error: null, errorInfo: null } 
   }
 
   static getDerivedStateFromError(error) {
-    return { hasError: true };
+    return { hasError: true } 
   }
 
   componentDidCatch(error, errorInfo) {
-    logErrorToMyService(error, errorInfo);
-    this.setState({ error, errorInfo });
+    logErrorToMyService(error, errorInfo) 
+    this.setState({ error, errorInfo }) 
   }
 
   render() {
@@ -27,11 +27,11 @@ class ErrorBoundary extends React.Component {
             <p>Error info: {this.state.errorInfo.componentStack}</p>
           )}
         </div>
-      );
+      ) 
     }
 
-    return this.props.children;
+    return this.props.children 
   }
 }
 
-export default ErrorBoundary;
+export default ErrorBoundary 

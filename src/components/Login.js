@@ -1,18 +1,18 @@
-import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { useEffect, useRef, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
-import * as Yup from 'yup';
-import { startLoginUser } from '../action/userAction';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons' 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome' 
+import React, { useEffect, useRef, useState } from 'react' 
+import { useDispatch } from 'react-redux' 
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min' 
+import * as Yup from 'yup' 
+import { startLoginUser } from '../action/userAction' 
 
 
 export default function Login(props) {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [error, setErrors] = useState({})
-    const [passwordVisible, setPasswordVisible] = useState(false);
-    const [isSubmitting, setIsSubmitting] = useState(false); // button disabled
+    const [passwordVisible, setPasswordVisible] = useState(false) 
+    const [isSubmitting, setIsSubmitting] = useState(false)  // button disabled
     const history = useHistory()
     const dispatch = useDispatch()
     const onfocus=useRef(null)
@@ -22,7 +22,7 @@ export default function Login(props) {
     },[]
     )
     const togglePasswordVisibility = () => {
-        setPasswordVisible(!passwordVisible);
+        setPasswordVisible(!passwordVisible) 
     }
 
     const validationSchema = Yup.object().shape({
@@ -40,16 +40,16 @@ export default function Login(props) {
             password
         }
         try {
-            await validationSchema.validate(formData, { abortEarly: false });
-            setIsSubmitting(true); // Disable the button during submission
+            await validationSchema.validate(formData, { abortEarly: false }) 
+            setIsSubmitting(true)  // Disable the button during submission
             //dispatch 
             dispatch(startLoginUser(formData, history, reset,setIsSubmitting))
         } catch (validationErrors) {
-            const errors = {};
+            const errors = {} 
             validationErrors.inner.forEach(error => {
-                errors[error.path] = error.message;
-            });
-            setErrors(errors);
+                errors[error.path] = error.message 
+            }) 
+            setErrors(errors) 
         }
     }
     return (
@@ -84,5 +84,5 @@ export default function Login(props) {
                 <div className="col-md-4"></div>
             </div>
         </div>
-    );
+    ) 
 }

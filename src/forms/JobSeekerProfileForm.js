@@ -25,10 +25,10 @@ const JobSeekerProfileForm = (props) => {
             // Set resume file if it exists
             if (props.user.profile.resume) {
                 // Create a Blob object from the resume data
-                const resumeBlob = new Blob([new Uint8Array(props.user.profile.resume.data)], { type: props.user.profile.resume.contentType });
+                const resumeBlob = new Blob([new Uint8Array(props.user.profile.resume.data)], { type: props.user.profile.resume.contentType }) 
                 // Create a File object from the Blob
-                const resumeFile = new File([resumeBlob], 'resume', { type: props.user.profile.resume.contentType });
-                setResume(resumeFile);
+                const resumeFile = new File([resumeBlob], 'resume', { type: props.user.profile.resume.contentType }) 
+                setResume(resumeFile) 
             }
         }
     }, [props.user])

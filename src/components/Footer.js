@@ -15,7 +15,7 @@ function Footer() {
 
   return (
     <footer className='mt-4' style={footerStyle}>
-      <p>&copy; 2024 Job Portal</p>
+     <p>&copy; 2024 Job Portal. All rights reserved.</p>
     </footer>
   )
 }

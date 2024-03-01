@@ -12,20 +12,20 @@ const JobForm = (props) => {
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
     const [requirements, setRequirements] = useState('')
-    const [location, setLocation] = useState('');
-    const [salary, setSalary] = useState('');
-    const [companyId, setCompanyId] = useState('');
+    const [location, setLocation] = useState('') 
+    const [salary, setSalary] = useState('') 
+    const [companyId, setCompanyId] = useState('') 
     const [toggle, setToggle] = useState(false)
-    const [errors, setErrors] = useState({});
+    const [errors, setErrors] = useState({}) 
     const [err, setErr] = useState(Boolean)
-    const dispatch = useDispatch();
+    const dispatch = useDispatch() 
 
     const validationSchema = Yup.object().shape({
         title: Yup.string().required('Title is required'),
         description: Yup.string().required('Description is required'),
         location: Yup.string().required('Location is required'),
         companyId: Yup.string().required('Select Company')
-    });
+    }) 
 
     useEffect(() => {
         dispatch(startGetUserInfo())
@@ -35,22 +35,22 @@ const JobForm = (props) => {
         if (user?.user?.role === 'admin') {
             dispatch(startGetAllCompanyDtls())
         } else if (user?.user?.role === 'employer') {
-            dispatch(startGetCompanyDtls());
+            dispatch(startGetCompanyDtls()) 
         }
     }, [user])
     useEffect(() => {
         if (job) {
-            setTitle(job.title || '');
-            setDescription(job.description || '');
-            setRequirements(job.requirements || '');
-            setLocation(job.location || '');
-            setSalary(job.salary || '');
+            setTitle(job.title || '') 
+            setDescription(job.description || '') 
+            setRequirements(job.requirements || '') 
+            setLocation(job.location || '') 
+            setSalary(job.salary || '') 
             setCompanyId(job.company_id._id || '')
 
             setId(job._id)
         }
     }, [props.job])
-    const company = useSelector(state => state.company.data);
+    const company = useSelector(state => state.company.data) 
     const handleChange = (e) => {
         const { name, value } = e.target
         // Clear the error for the changed input field

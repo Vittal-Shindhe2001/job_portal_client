@@ -1,11 +1,11 @@
 import React, { useEffect, useRef, useState, createContext, useContext } from 'react'
-import * as Yup from 'yup';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
-import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
-import { useDispatch } from 'react-redux';
-import { startRegisterUser } from '../action/userAction';
-const RegistrationContext = createContext();
+import * as Yup from 'yup' 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome' 
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons' 
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min' 
+import { useDispatch } from 'react-redux' 
+import { startRegisterUser } from '../action/userAction' 
+const RegistrationContext = createContext() 
 
 export default function Register() {
     const [userType, setUserType] = useState('jobseeker')
@@ -31,7 +31,7 @@ export default function Register() {
         lastName: Yup.string().required('Last name is required'),
         email: Yup.string().email('Invalid email').required('Email is required'),
         password: Yup.string().required('Password is required').min(6, 'Password must be at least 6 characters'),
-    });
+    }) 
 
     const employerSchema = Yup.object().shape({
         firstName: Yup.string().required('Employer name is required'),
@@ -39,25 +39,25 @@ export default function Register() {
         companyName: Yup.string().required('Company name is required'),
         email: Yup.string().email('Invalid email').required('Email is required'),
         password: Yup.string().required('Password is required').min(6, 'Password must be at least 6 characters'),
-    });
+    }) 
     const reset = () => {
-        setFirstName('');
-        setLastName('');
-        setPassword('');
-        setEmail('');
+        setFirstName('') 
+        setLastName('') 
+        setPassword('') 
+        setEmail('') 
         setCompanyName(userType === "employer" ? '' : companyName)
     }
     useEffect(() => {
         reset()
     }, [userType])
     const handleSubmit = async (e) => {
-        e.preventDefault();
+        e.preventDefault() 
 
-        let schema;
+        let schema 
         if (userType === 'jobseeker') {
-            schema = jobSeekerSchema;
+            schema = jobSeekerSchema 
         } else {
-            schema = employerSchema;
+            schema = employerSchema 
         }
 
         try {
@@ -68,7 +68,7 @@ export default function Register() {
                 companyName,
                 email,
                 password,
-            }, { abortEarly: false });
+            }, { abortEarly: false }) 
 
             // If validation passes, you can proceed with form submission
             const formData = {
@@ -78,20 +78,20 @@ export default function Register() {
                 email,
                 password,
                 role: userType
-            };
+            } 
             // Dispatch action or submit the form data
             dispatch(startRegisterUser(formData,reset,history))
-            console.log(formData);
+            console.log(formData) 
         } catch (errors) {
              // Handle validation errors
         if (errors && errors.inner) {
-            const errorsObject = {};
+            const errorsObject = {} 
             errors.inner.forEach(error => {
-                errorsObject[error.path] = error.message;
-            });
-            setErrors(errorsObject);
+                errorsObject[error.path] = error.message 
+            }) 
+            setErrors(errorsObject) 
         } else {
-            console.error('Validation error:', errors);
+            console.error('Validation error:', errors) 
         }
         }
 
@@ -151,36 +151,36 @@ export default function Register() {
 }
 
 function JobSeekerRegistrationForm() {
-    const [passwordVisible, setPasswordVisible] = useState(false);
-    const { firstNameRef, firstName, setFirstName, lastName, setLastName, email, setEmail, password, setPassword, handleSubmit, errors, setErrors } = useContext(RegistrationContext);
+    const [passwordVisible, setPasswordVisible] = useState(false) 
+    const { firstNameRef, firstName, setFirstName, lastName, setLastName, email, setEmail, password, setPassword, handleSubmit, errors, setErrors } = useContext(RegistrationContext) 
 
     const togglePasswordVisibility = () => {
-        setPasswordVisible(!passwordVisible);
+        setPasswordVisible(!passwordVisible) 
     }
 
     const handleFirstNameChange = (e) => {
-        setFirstName(e.target.value);
+        setFirstName(e.target.value) 
         if (errors.firstName) {
-            setErrors(prevErrors => ({ ...prevErrors, firstName: '' }));
+            setErrors(prevErrors => ({ ...prevErrors, firstName: '' })) 
         }
     }
 
     const handlelastNameChange = (e) => {
-        setLastName(e.target.value);
+        setLastName(e.target.value) 
         if (errors.lastName) {
-            setErrors(prevErrors => ({ ...prevErrors, lastName: '' }));
+            setErrors(prevErrors => ({ ...prevErrors, lastName: '' })) 
         }
     }
     const handleEmailChange = (e) => {
-        setEmail(e.target.value);
+        setEmail(e.target.value) 
         if (errors.email) {
-            setErrors(prevErrors => ({ ...prevErrors, email: '' }));
+            setErrors(prevErrors => ({ ...prevErrors, email: '' })) 
         }
     }
     const handlePasswordChange = (e) => {
-        setPassword(e.target.value);
+        setPassword(e.target.value) 
         if (errors.password) {
-            setErrors(prevErrors => ({ ...prevErrors, password: '' }));
+            setErrors(prevErrors => ({ ...prevErrors, password: '' })) 
         }
     }
     return (
@@ -214,42 +214,42 @@ function JobSeekerRegistrationForm() {
 }
 
 function EmployerRegistrationForm() {
-    const [passwordVisible, setPasswordVisible] = useState(false);
-    const { firstNameRef, firstName, setFirstName, lastName, setLastName, companyName, setCompanyName, email, setEmail, password, setPassword, handleSubmit, errors, setErrors } = useContext(RegistrationContext);
+    const [passwordVisible, setPasswordVisible] = useState(false) 
+    const { firstNameRef, firstName, setFirstName, lastName, setLastName, companyName, setCompanyName, email, setEmail, password, setPassword, handleSubmit, errors, setErrors } = useContext(RegistrationContext) 
 
     const togglePasswordVisibility = () => {
-        setPasswordVisible(!passwordVisible);
+        setPasswordVisible(!passwordVisible) 
     }
 
     const handleFirstNameChange = (e) => {
-        setFirstName(e.target.value);
+        setFirstName(e.target.value) 
         if (errors.firstName) {
-            setErrors(prevErrors => ({ ...prevErrors, firstName: '' }));
+            setErrors(prevErrors => ({ ...prevErrors, firstName: '' })) 
         }
     }
 
     const handlelastNameChange = (e) => {
-        setLastName(e.target.value);
+        setLastName(e.target.value) 
         if (errors.lastName) {
-            setErrors(prevErrors => ({ ...prevErrors, lastName: '' }));
+            setErrors(prevErrors => ({ ...prevErrors, lastName: '' })) 
         }
     }
     const handleCompanyNameChange = (e) => {
-        setCompanyName(e.target.value);
+        setCompanyName(e.target.value) 
         if (errors.companyName) {
-            setErrors(prevErrors => ({ ...prevErrors, companyName: '' }));
+            setErrors(prevErrors => ({ ...prevErrors, companyName: '' })) 
         }
     }
     const handleEmailChange = (e) => {
-        setEmail(e.target.value);
+        setEmail(e.target.value) 
         if (errors.email) {
-            setErrors(prevErrors => ({ ...prevErrors, email: '' }));
+            setErrors(prevErrors => ({ ...prevErrors, email: '' })) 
         }
     }
     const handlePasswordChange = (e) => {
-        setPassword(e.target.value);
+        setPassword(e.target.value) 
         if (errors.password) {
-            setErrors(prevErrors => ({ ...prevErrors, password: '' }));
+            setErrors(prevErrors => ({ ...prevErrors, password: '' })) 
         }
     }
     return (
