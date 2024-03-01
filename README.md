@@ -7,7 +7,7 @@ The project is focused on developing a comprehensive job portal app designed to 
 ## Core Features:
 1. User Profiles: Separate registration and customized profiles for job seekers and employers, allowing for tailored experiences.
 2.  Job Listings: Employers can post job vacancies with detailed descriptions, required qualifications, and other pertinent details.
-3.  Advanced Search & Filters: Enables job seekers to efficiently find job listings based on location, industry.
+3.  Advanced Search & Filters: Enables job seekers to efficiently find job listings based on location, and industry.
 
 ## Objectives:
 1.  Accessibility: To create an accessible platform that caters to diverse job seekers and employers, removing geographical and logistical barriers.
@@ -27,15 +27,12 @@ The project is focused on developing a comprehensive job portal app designed to 
 ## Installation
 
 1. Clone the repository:
-
 git clone https://github.com/Vittal-Shindhe2001/job_portal_client-.git
 
 2. Navigate to the project directory:
-
-    cd your-repository
+cd your-repository
 
 3. Install dependencies:
-
 yarn install
 # or
 npm install
@@ -45,4 +42,3 @@ npm install
 yarn start 
 # or
 npm start
-cd
