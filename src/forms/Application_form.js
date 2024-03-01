@@ -50,8 +50,8 @@ const ApplicationForm = (props) => {
         }
     }
     // const handleFileChange = (e) => {
-    //     const file = e.target.files[0];
-    //     setResume(file);
+    //     const file = e.target.files[0] 
+    //     setResume(file) 
     // }
 
     const handleToggle = () => {
@@ -74,7 +74,7 @@ const ApplicationForm = (props) => {
             status: status,
             company_Id: companyId
         }
-        console.log(formData.resume);
+        console.log(formData.resume) 
         const schema = Yup.object().shape({
             phone: Yup.string()
                 .required('Job ID is required')

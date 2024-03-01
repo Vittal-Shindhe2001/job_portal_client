@@ -5,5 +5,5 @@ export const logErrorToMyService = (error, errorInfo) => {
     console.error("Error info:", errorInfo)
     
    
-  };
+  } 
   
