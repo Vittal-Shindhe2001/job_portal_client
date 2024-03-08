@@ -64,6 +64,7 @@ export default function CompanyForm(props) {
         if (toggle) {
             props.toggle()
             setErrors({})
+            props.handleUseEffect()
         }
     }, [toggle])
     const handleSubmit = async (e) => {
@@ -75,8 +76,9 @@ export default function CompanyForm(props) {
             // Handle form submission, e.g., send data to backend
             dispatch(startCreateCompany(formData,handleToggle))
             // Clear errors if any
-            setErrors({})
-            props.toggle()
+            // setErrors({})
+            // props.toggle()
+            // props.handleUseEffect()
         } catch (validationErrors) {
             const errors = {}
             validationErrors.inner.forEach(error => {

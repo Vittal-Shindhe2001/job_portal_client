@@ -1,10 +1,10 @@
-import React, { Suspense, useEffect, useState } from 'react' 
-import { Link, Route, Switch, useHistory, useLocation, withRouter } from 'react-router-dom/cjs/react-router-dom.min' 
-import Spinner from './Loding-Spinner' 
+import React, { Suspense, useEffect, useState } from 'react'
+import { Link, Route, Switch, useHistory, useLocation, withRouter } from 'react-router-dom/cjs/react-router-dom.min'
+import Spinner from './Loding-Spinner'
 import { jwtDecode } from 'jwt-decode'
-import PrivateRoute from './helper_function/Private_route' 
-import { ToastContainer, toast } from 'react-toastify' 
-import 'react-toastify/dist/ReactToastify.css' 
+import PrivateRoute from './helper_function/Private_route'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 // Lazy load components
 // const Home = React.lazy(() => import('./Home')) 
 // const Register = React.lazy(() => import('./Register')) 
@@ -47,9 +47,9 @@ const NavBar = () => {
     }, [location])
     useEffect(() => {
         if (!token) {
-            history.push("/login") 
+            history.push("/login")
         }
-    }, [token, history]) 
+    }, [token, history])
     const handleLogout = () => {
         history.push("/login")
         localStorage.clear()
@@ -99,7 +99,7 @@ const NavBar = () => {
                                     <Link className={`nav-link ${location.pathname === '/applications' ? 'active' : ''}`} to="/applications"><span className={location.pathname === '/applications' ? 'fw-bold' : ''}>Applications</span></Link>
                                 </li>
                                 <li className='nav-item'>
-                                    <Link className={`nav-link ${location.pathname === '/employe/profile' ? 'active' : ''}`} to="/employe/profile"><span className={location.pathname === '//employe/profile' ? 'fw-bold' : ''}>Profile</span></Link>
+                                    <Link className={`nav-link ${location.pathname === '/employe/profile' ? 'active' : ''}`} to="/employe/profile"><span className={location.pathname === '/employe/profile' ? 'fw-bold' : ''}>Profile</span></Link>
                                 </li>
                                 <Logout handleLogout={handleLogout} location={location} />
                             </ul>
@@ -190,7 +190,7 @@ const NavBar = () => {
             {
                 token && tokendata.role === 'jobseeker' && <div>
                     <Suspense fallback={<Spinner />}>
-                            
+                        <PrivateRoute path='/' component={Home} exact={true} />
                         <PrivateRoute path='/jobs' component={FindJob} exact={true} />
                         <PrivateRoute path='/profile' component={jobseekersProfile} exact={true} />
                         <PrivateRoute path="/jobseeker/job/:id" component={Job_details} />
@@ -198,11 +198,10 @@ const NavBar = () => {
                     </Suspense>
                 </div>
             }
-            {/* <Route path="/job/:id" component={JobPost} />
-            <Route path="/jobseeker/job/:id" component={Job_details} /> */}
+
             <ToastContainer />
         </>
-    ) 
-} 
+    )
+}
 
 export default withRouter(NavBar) 
