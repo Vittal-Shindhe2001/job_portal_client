@@ -20,9 +20,12 @@ const ProfileEmployee = () => {
         toggle()
 
     }
+    const handleUseEffect=()=>{
+
+    }
     useEffect(() => {
         dispatch(startGetCompanyDtls())
-    }, [])
+    }, [handleUseEffect])
     const company = useSelector(state => state.company.data)
     return (
         <div className="container">
@@ -47,7 +50,7 @@ const ProfileEmployee = () => {
                     <ModalHeader toggle={toggle}>Create Company Profile</ModalHeader>
                     <ModalBody>
                         <div className="col-md-12">
-                            <CompanyForm toggle={toggle} />
+                            <CompanyForm toggle={toggle} handleUseEffect={handleUseEffect}/>
                         </div>
                     </ModalBody>
                 </Modal>

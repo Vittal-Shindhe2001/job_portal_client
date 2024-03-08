@@ -5,8 +5,6 @@ import { startGetJobs, startSearchJobPost, startSortByDateJobPost } from '../../
 import { debounce } from 'lodash'
 import { Link, useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 const FindJob = () => {
-    // Mock job data for demonstration
-    // const [jobs, setJobs] = useState([])
     const [searchTerm, setSearchTerm] = useState('')
     const [sortBy, setSortBy] = useState('date');
     const [currentPage, setCurrentPage] = useState(1);
@@ -17,9 +15,7 @@ const FindJob = () => {
     useEffect(() => {
         dispatch(startGetJobs())
     }, [history])
-    const jobs = useSelector(state => state.job.data)
-    console.log(jobs);
-
+    const jobs = useSelector(state => state.job.data.filter(job => !job.isDeleted))
     // Get current jobs
         const indexOfLastJob = currentPage * jobsPerPage
         const indexOfFirstJob = indexOfLastJob - jobsPerPage

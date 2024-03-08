@@ -6,6 +6,7 @@ import JobForm from '../../forms/Job_form'
 import { useDispatch, useSelector } from 'react-redux'
 import { startDeleteJobPost, startGetEmployesJob } from '../../action/jodPostAction'
 import { useHistory, useParams } from 'react-router-dom/cjs/react-router-dom.min'
+import { set } from 'lodash'
 
 
 
@@ -33,6 +34,7 @@ const JobListing = () => {
 
 
     const handlebtn = () => {
+        setEditJob(null)
         setShow(!show)
         toggle()
     }
