@@ -13,9 +13,10 @@ function Footer() {
     width: '100%'
   }
 
+  const currentYear = new Date().getFullYear()
   return (
     <footer className='mt-4' style={footerStyle}>
-     <p>&copy; 2024 Job Portal. All rights reserved.</p>
+     <p>&copy; {currentYear} Job Portal. All rights reserved.</p>
     </footer>
   )
 }

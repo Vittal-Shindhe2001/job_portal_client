@@ -43,7 +43,6 @@ const JobListing = () => {
         dispatch(startGetEmployesJob())
     }, [modal, history])
 
-
     const indexOfLastJob = currentPage * jobsPerPage
     const indexOfFirstJob = indexOfLastJob - jobsPerPage
     const currentJobs = jobs && Array.isArray(jobs) && jobs.slice(indexOfFirstJob, indexOfLastJob)
