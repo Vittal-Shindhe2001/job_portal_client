@@ -34,13 +34,12 @@ export const startCreateCompany = (data, toggle) => {
             if (result.data) {
                 dispatch(setCompanyDetails(result.data));
                 toggle()
-                toast.success(result.data.message,{ autoClose: 1000 });
+                toast.success(result.data.message, { autoClose: 1000 });
                 dispatch(clearError());
             }
         } catch (error) {
-            console.error(error);
             dispatch(setError('Failed to create company'));
-            toast.error('Failed to create company. Please try again.',{autoClose:1000});
+            toast.error('Failed to create company. Please try again.', { autoClose: 1000 });
         }
     };
 };
@@ -54,17 +53,20 @@ export const setCompany = (data) => {
 };
 
 export const startGetCompanyDtls = () => {
-    return async (dispatch) => {
-        try {
-            const result = await axios.get('/api/company/details', { headers: { "Authorization": localStorage.getItem('token') } });
-            dispatch(setCompany(result.data));
-            dispatch(clearError()); // Clear any previous errors
-        } catch (error) {
-            console.error(error);
-            dispatch(setError('Failed to fetch company details'));
-            toast.error('Failed to fetch company details. Please try again.',{autoClose:1000});
-        }
-    };
+    return (dispatch) => {
+        (
+            async () => {
+                try {
+                    const result = await axios.get('/api/company/details', { headers: { "Authorization": localStorage.getItem('token') } });
+                    dispatch(setCompany(result.data));
+                    dispatch(clearError()); // Clear any previous errors
+                } catch (error) {
+                    dispatch(setError('Failed to fetch company details'));
+                    toast.error('Failed to fetch company details. Please try again.', { autoClose: 1000 });
+                }
+            }
+        )()
+    }
 }
 
 //get all company details by admin

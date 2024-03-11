@@ -42,7 +42,9 @@ export const startGetUserInfo = () => {
             async () => {
                 try {
                     const result = await axios.get('/api/user/info', { headers: { 'Authorization': localStorage.getItem("token") } })
-                    dispatch(setUserInfo(result.data))
+                    if (result.data) {
+                        dispatch(setUserInfo(result.data))
+                    }
                 } catch (error) {
                     console.log(error);
                 }

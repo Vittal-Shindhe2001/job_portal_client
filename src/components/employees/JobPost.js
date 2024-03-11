@@ -11,7 +11,6 @@ const JobPost = () => {
   useEffect(() => {
     dispatch(startGetSelectedJob(id))
   }, [dispatch, id])
-
   return (
     <div className="container mt-3">
       <div className="card">
