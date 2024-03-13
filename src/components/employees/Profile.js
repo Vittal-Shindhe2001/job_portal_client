@@ -57,6 +57,7 @@ const ProfileEmployee = () => {
                             <p className="card-text">Industry: {ele.industry}</p>
                             <p className="card-text">Description: {ele.description}</p>
                             <a href={ele.website} className="card-link">Website</a>
+                            <hr/>
                         </div>
                     )
                 })}
