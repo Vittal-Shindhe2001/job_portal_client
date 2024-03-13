@@ -53,7 +53,7 @@ const NavBar = () => {
     const handleLogout = () => {
         history.push("/login")
         localStorage.clear()
-        toast.success("Logout successfully")
+        toast.success("Logout successfully",{ autoClose: 1000 })
     }
     return (
         <>

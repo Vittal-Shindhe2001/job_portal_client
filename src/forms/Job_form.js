@@ -140,7 +140,7 @@ const JobForm = (props) => {
             </FormGroup>
             <FormGroup>
                 <Label for="salary">Salary</Label>
-                <Input type="number" id="salary" name="salary" value={salary} onChange={handleChange} invalid={!!errors.salary} />
+                <Input type="text" id="salary" name="salary" value={salary} onChange={handleChange} invalid={!!errors.salary} />
                 {errors.salary && <div className="text-danger">{errors.salary}</div>}
             </FormGroup>
             <FormGroup>

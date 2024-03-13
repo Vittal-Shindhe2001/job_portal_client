@@ -19,7 +19,7 @@ export default function Dashboard() {
           <div className="card">
             <div className="card-body">
               <h5 className="card-title">Manage Users</h5>
-              <p className="card-text">View, edit, or delete user accounts.</p>
+              <p className="card-text">View user info.</p>
               <Link to="/users" className="btn btn-primary">Go to Users</Link>
             </div>
           </div>

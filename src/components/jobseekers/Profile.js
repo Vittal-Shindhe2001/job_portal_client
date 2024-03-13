@@ -13,6 +13,8 @@ const ProfileJobSeeker = () => {
     const [showMore, setShowMore] = useState(false);
     const [userInfo,setUser]=useState()
     const [resumeUrl, setResumeUrl] = useState('')
+    //state for after update the user details to featch data from server
+    const [updated,setUpdated]=useState(false)
     // Dispatch function
     const dispatch = useDispatch();
 
@@ -27,12 +29,16 @@ const ProfileJobSeeker = () => {
         setShow(!show);
         toggle()
         setUser(e)
-    };
+    }
+    //call back function pass popup window-JobSeekerProfileForm
+    const callBack=()=>{
+        setUpdated(!updated)
+    }
 
     // Fetch user information on component mount
     useEffect(() => {
         dispatch(startGetUserInfo());
-    }, [dispatch]);
+    }, [dispatch,updated]);
 
     // Retrieve user data from Redux store
     const user = useSelector((state) => state.user.data);
@@ -55,9 +61,9 @@ const ProfileJobSeeker = () => {
                         <p className="card-text">Phone: {user.profile?.phone}</p>
                         {showMore && (
                             <div>
-                                <p className="card-text">Skills: {user.profile.skills?.join(', ')}</p>
-                                <p className="card-text">Experience: {user.profile.experience}</p>
-                                <p className="card-text">Education: {user.profile.education}</p>
+                                <p className="card-text">Skills: {user.profile?.skills?.join(', ')}</p>
+                                <p className="card-text">Experience: {user.profile?.experience}</p>
+                                <p className="card-text">Education: {user.profile?.education}</p>
 
                                 {/* {user.profile.resume && (
                                     <div>
@@ -83,7 +89,7 @@ const ProfileJobSeeker = () => {
                     <ModalHeader toggle={toggle}>Update Profile</ModalHeader>
                     <ModalBody>
                         <div className="col-md-12">
-                            <JobSeekerProfileForm toggle={toggle} user={userInfo}/>
+                            <JobSeekerProfileForm toggle={toggle} callBack={callBack} user={userInfo}/>
                         </div>
                     </ModalBody>
                 </Modal>

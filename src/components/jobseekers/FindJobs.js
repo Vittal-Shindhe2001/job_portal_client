@@ -15,7 +15,13 @@ const FindJob = () => {
     useEffect(() => {
         dispatch(startGetJobs())
     }, [history])
-    const jobs = useSelector(state => state.job.data.filter(job => !job.isDeleted))
+    const jobs = useSelector(state => {
+        if (state.job && state.job.data && Array.isArray(state.job.data)) {
+            return state.job.data.filter(job => !job.isDeleted)
+            } else {
+                return []
+            }
+    })
     // Get current jobs
         const indexOfLastJob = currentPage * jobsPerPage
         const indexOfFirstJob = indexOfLastJob - jobsPerPage

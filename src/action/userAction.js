@@ -14,7 +14,7 @@ export const startRegisterUser = (data, reset, history) => {
                     toast.error(result.data.message)
                 } else {
                     // Show success notification
-                    toast.success('Registration successful!');
+                    toast.success('Registration successful!',{ autoClose: 1000 });
                     // Reset form after successful registration
                     reset();
                     // Redirect to another route using history
@@ -127,15 +127,14 @@ export const startEditUser = (data) => {
 }
 
 export const startUpdateJobseekerProfile=(data,toggle)=>{
-    console.log(data);
     return(dispatch)=>{
         (
             async()=>{
                 try {
-                    const result=await axios.post('/api/jobseeker/profileup',data,{headers:{'Content-Type': 'multipart/form-data','Authorization':localStorage.getItem('token')}})
+                    const result=await axios.put('/api/jobseeker/profileup',data,{headers:{'Content-Type': 'multipart/form-data','Authorization':localStorage.getItem('token')}})
                     if (result.data) {
-                        toast.success(result.data.message,{autoClose:1000})
                         toggle()
+                        toast.success(result.data.message,{autoClose:1000})
                     }
                 } catch (error) {
                     console.log(error.details);

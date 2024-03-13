@@ -183,7 +183,7 @@ export const startEditJobPost = (id, formData, handleToggle) => {
         (
             async () => {
                 try {
-                    const result = await axios.post(`/api/admin/edit/job/post/${id}`, formData, { headers: { 'Authorization': localStorage.getItem('token') } })
+                    const result = await axios.put(`/api/admin/edit/job/post/${id}`, formData, { headers: { 'Authorization': localStorage.getItem('token') } })
                     if (result.data) {
                         dispatch(setEditJobPost(result.data))
                         dispatch(clearError())
@@ -198,20 +198,3 @@ export const startEditJobPost = (id, formData, handleToggle) => {
         )()
     }
 }
-// export const startGetAllJobs=()=>{
-//     return(dispatch)=>{
-//         (
-//             async()=>{
-//                 try {
-//                     const result=await axios.get('/api/admin/get/allJobPost',{headers:{'Authorization':localStorage.getItem('token')}})
-//                     if (result.data) {
-//                         dispatch(setJobs(result.data))
-//                         dispatch(clearError())
-//                     }
-//                 } catch (error) {
-//                     setError('error occured in feaching jobs')
-//                 }
-//             }
-//         )()
-//     }
-// }

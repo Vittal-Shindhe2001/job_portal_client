@@ -5,6 +5,10 @@ import * as Yup from 'yup'
 import { startUpdateJobseekerProfile } from '../action/userAction'
 
 const JobSeekerProfileForm = (props) => {
+    console.log(props.user);
+    const [firstName, setFirstName] = useState('')
+    const [lastName, setLastName] = useState('')
+    const [email, setEmail] = useState('')
     const [phone, setPhone] = useState('')
     const [address, setAddress] = useState('')
     const [education, setEducation] = useState('')
@@ -16,25 +20,35 @@ const JobSeekerProfileForm = (props) => {
     //if user info there set to state variable
     useEffect(() => {
         if (props.user) {
-            const { phone, address, education, experience, skills } = props.user.profile
-            setPhone(phone || '')
-            setAddress(address || '')
-            setEducation(education || '')
-            setExperience(experience || '')
-            setSkills(skills ? skills.join(', ') : '')
-            // Set resume file if it exists
-            if (props.user.profile.resume) {
-                // Create a Blob object from the resume data
-                const resumeBlob = new Blob([new Uint8Array(props.user.profile.resume.data)], { type: props.user.profile.resume.contentType }) 
-                // Create a File object from the Blob
-                const resumeFile = new File([resumeBlob], 'resume', { type: props.user.profile.resume.contentType }) 
-                setResume(resumeFile) 
+            const { firstName, lastName, email } = props.user.user
+            setFirstName(firstName || '')
+            setLastName(lastName || '')
+            setEmail(email || '')
+
+            if (props.user.profile) {
+                const { phone, address, education, experience, skills } = props.user.profile
+                setPhone(phone || '')
+                setAddress(address || '')
+                setEducation(education || '')
+                setExperience(experience || '')
+                setSkills(skills ? skills.join(', ') : '')
+                // Set resume file if it exists
+                if (props.user.profile.resume) {
+                    // Create a Blob object from the resume data
+                    const resumeBlob = new Blob([new Uint8Array(props.user.profile.resume.data)], { type: props.user.profile.resume.contentType })
+                    // Create a File object from the Blob
+                    const resumeFile = new File([resumeBlob], 'resume', { type: props.user.profile.resume.contentType })
+                    setResume(resumeFile)
+                }
             }
         }
     }, [props.user])
 
     const dispatch = useDispatch()
     const validationSchema = Yup.object().shape({
+        firstName: Yup.string().required('First name is required'),
+        lastName: Yup.string().required('Last name is required'),
+        email: Yup.string().email('Invalid email').required('Email is required'),
         phone: Yup.string().matches(/^[0-9]+$/, 'Phone number must contain only digits').required('Phone number is required'),
         address: Yup.string().required('Address is required'),
         education: Yup.string().required('Education details are required'),
@@ -50,6 +64,15 @@ const JobSeekerProfileForm = (props) => {
         // Clear the error for the changed input field
         setErrors(prevErrors => ({ ...prevErrors, [name]: '' }))
         switch (name) {
+            case 'firstName':
+                setFirstName(value)
+                break
+            case 'lastName':
+                setLastName(value)
+                break
+            case 'email':
+                setEmail(value)
+                break
             case 'phone':
                 setPhone(value)
                 break
@@ -81,20 +104,21 @@ const JobSeekerProfileForm = (props) => {
     }
     useEffect(() => {
         if (toggle) {
+            props.callBack()
             props.toggle()
             setErrors({})
         }
     }, [toggle])
     const handleSubmit = async (e) => {
         e.preventDefault()
-        const formData = { skills, phone, address, education, experience, resume }
+        const formData = { skills, phone, address, education, experience, resume, firstName, lastName, email }
         try {
             await validationSchema.validate(formData, { abortEarly: false })
-            console.log(formData)
             // Handle form submission, e.g., send data to backend
             dispatch(startUpdateJobseekerProfile(formData, handleToggle))
-            setErrors({})
-            props.toggle()
+            // setErrors({})
+            // props.toggle()
+            // props.callBack()
         } catch (validationErrors) {
             const errors = {}
             validationErrors.inner.forEach(error => {
@@ -106,6 +130,21 @@ const JobSeekerProfileForm = (props) => {
 
     return (
         <Form onSubmit={handleSubmit}>
+            <FormGroup>
+                <Label for="firstName">First Name</Label>
+                <Input type="text" id="firstName" name="firstName" value={firstName} onChange={handleChange} invalid={!!errors.firstName} />
+                {errors.firstName && <div className="text-danger">{errors.firstName}</div>}
+            </FormGroup>
+            <FormGroup>
+                <Label for="lastName">Last Name</Label>
+                <Input type="text" id="lastName" name="lastName" value={lastName} onChange={handleChange} invalid={!!errors.lastName} />
+                {errors.lastName && <div className="text-danger">{errors.lastName}</div>}
+            </FormGroup>
+            <FormGroup>
+                <Label for="email">Email</Label>
+                <Input type="email" id="email" name="email" value={email} onChange={handleChange} invalid={!!errors.email} />
+                {errors.email && <div className="text-danger">{errors.email}</div>}
+            </FormGroup>
             <FormGroup>
                 <Label for="phone">Phone</Label>
                 <Input type="text" id="phone" name="phone" value={phone} onChange={handleChange} invalid={!!errors.phone} />
