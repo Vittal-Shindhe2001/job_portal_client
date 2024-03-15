@@ -26,7 +26,7 @@ export default function Job_details() {
     useEffect(() => {
         // Check if the current job has been applied for
         if (applications && job) {
-            const isApplied = applications.some(app => app.job_id._id === job._id)
+            const isApplied = applications?.some(app => app.job_id._id === job._id)
             setApplied(isApplied);
         }
     }, [applications, job, history])

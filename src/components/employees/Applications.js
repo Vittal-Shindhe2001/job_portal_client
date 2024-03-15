@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { startGetEmployeJobApplication, start_Update_Status_Application } from '../../action/jobApplicationsAction'
+import { startGetEmployeJobApplication } from '../../action/jobApplicationsAction'
 
 
 const ApplicationsEmployer = () => {
@@ -46,7 +46,7 @@ const ApplicationsEmployer = () => {
                                 <td>{ele.applicant_id.firstName} {ele.applicant_id.lastName}</td>
                                 <td>{ele.status}</td>
                                 <td>
-                                    <Link to={`/employer/application/view/${ele._id}`} className="btn btn-primary btn-sm me-2" onClick={() => { dispatch(start_Update_Status_Application(ele._id, 'view')) }}>View</Link>
+                                    <Link to={`/employer/application/view/${ele._id}`} className="btn btn-primary btn-sm me-2" >View</Link>
                                 </td>
                             </tr>
                         ))}
